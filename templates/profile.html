@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="{% url "main:index" %}">
+                <div class="logo">
+                    <img src="{% static 'logo.png' %}" alt="PC Repair & Assembly Logo">
+                </div>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url "main:index" %}">Главная</a></li>
+                </ul>
+            </nav>
+            <div class="account">
+                <form method="post" action="{% url 'main:logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; cursor: pointer;">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
+            </div>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i> <!-- Иконка луны для темной темы -->
+            </button>
+    </header>
+    <main>
+        <section class="profile-section">
+            <h2>Личный кабинет</h2>
+            <div class="profile-info">
+                <p><strong>Имя: </strong>{{ user_data.name }}</p>
+                <p><strong>Email: </strong>{{ user_data.email }}</p>
+                <p><strong>Телефон: </strong>{{ user_data.phone }}</p>
+                <p><strong>Город: </strong>{{ user_data.city }}</p>
+                {% comment %} <a href="" class="edit-profile-button"><i class="fas fa-edit"></i> Изменить данные</a> {% endcomment %}
+            </div>
+            {% comment %} <div class="cart">
+                <h3>Корзина</h3>
+                <ul>
+                    {% for item in cart_items %}
+                        <li>{{ item.name }} - {{ item.price }} руб.</li>
+                    {% empty %}
+                        <li>Ваша корзина пуста.</li>
+                    {% endfor %}
+                </ul>
+            </div> {% endcomment %}
+        </section>
+    </main>
+    <footer class="footer">
+        <p>© 2024 PC Repair & Assembly</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+    
+            // Проверяем, есть ли сохраненная тема в localStorage
+            if (localStorage.getItem('theme') === 'dark-theme') {
+                body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Иконка солнца для светлой темы
+            } else {
+                body.classList.remove('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
+            }
+    
+            // Функция для переключения темы
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+    
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Иконка солнца для светлой темы
+                } else {
+                    localStorage.setItem('theme', 'light-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
+                }
+            });
+        });
+    </script>
+</body>
+</html>

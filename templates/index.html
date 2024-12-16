@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Repair & Assembly</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="{% url "main:index" %}">
+                <div class="logo">
+                    <img src="{% static "logo.png" %}" alt="PC Repair & Assembly Logo">
+                </div>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#works">Наши работы</a></li>
+                    <li><a href="#custom">Индивидуальные сборки</a></li>
+                    <li><a href="#repair">Ремонт</a></li>
+                    <li><a href="#trade-in">Tradi-In</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="phone">
+                <a href="tel:+123456789" class="tellink">+123456789</a>
+            </div>
+            <div class="account">
+                <a href="{% url "main:profile" %}"><i class="fas fa-user"></i></a>
+            </div>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i> <!-- Иконка луны для темной темы -->
+            </button>
+            
+        </div>
+    </header>
+    <main>
+        <section id="about" class="section">
+            <div class="about-content">
+                <div class="about-text">
+                    <strong><h1>Твой ПК — наша работа. <br>Твоя мощь — наш успех.</h1></strong>
+                    <a href="tel:+77777777777" class="contact-button">Связаться с нами</a>
+                </div>
+                <div class="about-image">
+                    <img src="{% static "logo.png" %}" alt="О нас">
+                </div>
+            </div>
+        </section>
+        {% if works %}
+        <section id="works" class="section">
+            <h2>Наши работы</h2>
+            <div class="swiper">
+                <div class="slider-container">
+                    <div class="slider">
+                        {% for  work in works%}
+                            <div class="slide">
+                                <img src="{{ work.photo.url }}" alt="">
+                                <p>{{ work.description }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                <button class="prev">⟨</button>
+                <button class="next">⟩</button>
+            </div>
+        </section>
+        {% endif %}
+        {% if  builds %}
+        <section id="custom" class="section">
+            <h2>Индивидуальные сборки</h2>
+            <p>{{ builds.text|safe }}</p>
+            {% comment %} <a href="tel:+77777777777" class="undertext">Связаться с нами</a> {% endcomment %}
+        </section>
+        {% endif %}
+        {% if repair %}
+        <section id="repair" class="section">
+            <h2>Ремонт</h2>
+            <p>{{ repair.text|safe }}</p>
+            
+        </section>
+        {% endif %}
+        {% if tradein %}
+        <section id="trade-in" class="section">
+            <h2>Trade-In</h2>
+            <p>{{ tradein.text|safe  }}</p>
+        </section>
+        {% endif %}
+        {% if contacts %}
+        <section id="contacts" class="section">
+            <h2>Контакты</h2>
+            <p>{{ contacts.text|safe  }}</p>
+        </section>
+        {% endif %}
+    </main>
+    <footer class="footer">
+        <p>© 2024 PC Repair & Assembly</p>
+    </footer>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script defer src="{% static "script.js" %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+    
+            // Проверяем, есть ли сохраненная тема в localStorage
+            if (localStorage.getItem('theme') === 'dark-theme') {
+                body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Иконка солнца для светлой темы
+            } else {
+                body.classList.remove('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
+            }
+    
+            // Функция для переключения темы
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+    
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Иконка солнца для светлой темы
+                } else {
+                    localStorage.setItem('theme', 'light-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
+                }
+            });
+        });
+    </script>
+</body>
+</html>

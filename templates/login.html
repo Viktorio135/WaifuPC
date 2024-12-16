@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в личный кабинет</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static "styles.css" %}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="{% url "main:index" %}">
+            <div class="logo">
+                <img src="{% static "logo.png" %}" alt="PC Repair & Assembly Logo">
+            </div>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{% url "main:index" %}">Главная</a></li>
+                </ul>
+            </nav>
+            <div class="phone">
+                <p>+123456789</p>
+            </div>
+            <div class="account">
+                <a href="{% url "main:login" %}"><i class="fas fa-user"></i></a>
+            </div>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i> <!-- Иконка луны для темной темы -->
+            </button>
+        </div>
+    </header>
+    <main>
+        <section class="login-section centered">
+            <h2>Вход в личный кабинет</h2>
+            <form class="login-form" method='POST'>
+                {% csrf_token %}
+                {{ form.as_table }}
+                <button type="submit">Войти</button>
+            </form>
+            <p>Нет аккаунта? <a href="{% url "main:register" %}">Зарегистрироваться</a></p>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>© 2024 PC Repair & Assembly</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+    
+            // Проверяем, есть ли сохраненная тема в localStorage
+            if (localStorage.getItem('theme') === 'dark-theme') {
+                body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Иконка солнца для светлой темы
+            } else {
+                body.classList.remove('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
+            }
+    
+            // Функция для переключения темы
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+    
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Иконка солнца для светлой темы
+                } else {
+                    localStorage.setItem('theme', 'light-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
+                }
+            });
+        });
+    </script>
+</body>
+</html>
