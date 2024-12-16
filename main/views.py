@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, View
@@ -5,7 +6,7 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login, logout, authenticate
 
 from .models import CustomUser, Works, Builds, Repair, TradeIn, Contacts
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, TradeInForm
 
 
 class IndexPage(TemplateView):
@@ -18,7 +19,42 @@ class IndexPage(TemplateView):
         context["repair"] = Repair.objects.first()
         context["tradein"] = TradeIn.objects.first()
         context["contacts"] = Contacts.objects.first()
+        context['form'] = TradeInForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        # Получаем данные из формы
+        form = TradeInForm(request.POST)
+        if form.is_valid():
+
+            # Отправляем письмо
+            subject = 'Новая заявка на Trade-In'
+            message = f"Email: {form.cleaned_data['email']}\n" \
+                      f"Сообщение: {form.cleaned_data['text']}"
+            from_email = 'spakovskijviktor0@gmail.com'  # Укажите ваш email
+            recipient_list = ['spakovskijviktor0@gmail.com']  # Укажите email получателя
+
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+            # Устанавливаем флаг успешной отправки в сессии
+            request.session['success_message'] = 'Спасибо! Ваша заявка отправлена.'
+
+            # Перенаправляем пользователя на ту же страницу
+            return redirect('main:index')  # 'index' — это имя URL для вашей страницы
+
+        # Если форма не валидна, возвращаем её с ошибками
+        context = self.get_context_data(**kwargs)
+        context['form'] = form
+        return self.render_to_response(context)
+
+    def get(self, request, *args, **kwargs):
+        # Проверяем, есть ли сообщение об успешной отправке в сессии
+        success_message = request.session.pop('success_message', None)
+        context = self.get_context_data(**kwargs)
+        if success_message:
+            context['success_message'] = success_message
+        return self.render_to_response(context)
+
     
 
 

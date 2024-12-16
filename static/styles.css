@@ -42,13 +42,13 @@ body {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 0.9rem; /* Уменьшаем размер текста */
+    font-size: 1.2rem; /* Уменьшаем размер текста */
 }
 
 .account a {
     color: white;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .section {
@@ -120,7 +120,7 @@ body {
     padding: 15px 30px; /* Увеличиваем отступы внутри кнопки */
     border-radius: 10px; /* Скругляем углы */
     cursor: pointer; /* Курсор в виде руки при наведении */
-    font-size: 1.2rem; /* Увеличиваем размер текста */
+    font-size: 1.3rem; /* Увеличиваем размер текста */
     font-weight: bold; /* Делаем текст жирным */
     transition: background 0.3s ease, transform 0.3s ease; /* Анимация при наведении */
     display: inline-block; /* Делаем кнопку блочным элементом */
@@ -137,7 +137,7 @@ body {
     padding: 15px 30px; /* Увеличиваем отступы внутри кнопки */
     border-radius: 10px; /* Скругляем углы */
     cursor: pointer; /* Курсор в виде руки при наведении */
-    font-size: 1.2rem; /* Увеличиваем размер текста */
+    font-size: 1.3rem; /* Увеличиваем размер текста */
     font-weight: bold; /* Делаем текст жирным */
     transition: background 0.3s ease, transform 0.3s ease; /* Анимация при наведении */
     display: inline-block; /* Делаем кнопку блочным элементом */
@@ -169,7 +169,50 @@ body {
     margin: 0 auto;
     position: relative;
 }
+/* Стили для секпроции */
+.section {
+    position: relative; /* Добавляем позицию для размещения кнопок */
+    padding-top: 60px; /* Добавляем отступ сверху для кнопок */
+}
 
+/* Контейнер для кнопок */
+.slider-controls {
+    position: absolute;
+    top: 10px; /* Позиция сверху */
+    right: 10px; /* Позиция справа */
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+    z-index: 10; /* Убедимся, что кнопки находятся поверх других элементов */
+}
+
+/* Кнопки слайдера */
+.prev,
+.next {
+    background-color: #f69eca;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: #e65ca0; /* Темнее розовый цвет при наведении */
+    transform: scale(1.1); /* Увеличение кнопки на 10% */
+}
+
+/* Неактивные кнопки */
+.prev.inactive,
+.next.inactive {
+    background-color: #ccc; /* Серый цвет для неактивных кнопок */
+    cursor: not-allowed; /* Изменяем курсор на "не разрешено" */
+    opacity: 0.5; /* Уменьшаем непрозрачность */
+}
+
+/* Стили для слайдера */
 .slider-container {
     overflow: hidden;
     width: 100%;
@@ -180,7 +223,6 @@ body {
     transition: transform 0.5s ease;
 }
 
-/* Карточки */
 .slide {
     flex: 0 0 33.33%; /* По умолчанию три карточки */
     box-sizing: border-box;
@@ -193,69 +235,101 @@ body {
 
 .slide img {
     width: 100%;
-    border-radius: 12px; /* Скругленные углы */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень под изображением */
-    transition: transform 0.3s ease; /* Анимация при наведении */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .slide img:hover {
-    transform: scale(1.02); /* Увеличение при наведении */
+    transform: scale(1.02);
 }
 
 .slide p {
     margin-top: 10px;
     padding: 7px;
     background-color: #fff;
-    border-radius: 8px; /* Скругленные углы текста */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень вокруг текста */
-    font-size: 0.9rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.4rem;
     color: #333;
     text-align: left;
     width: 100%;
 }
 
 .slide:hover {
-    transform: translateY(-2px); /* Поднимаем карточку */
-    /* box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);  */
+    transform: translateY(-2px);
 }
 
-/* Кнопки */
+/* Адаптивность */
+@media (max-width: 768px) {
+    .slide {
+        flex: 0 0 50%; /* Две карточки на средних экранах */
+    }
 
-
-button.visible {
-    display: block; /* Появляются только при необходимости */
+    /* Позиционирование кнопок на мобильных устройствах */
+    .slider-controls {
+        top: 50px; /* Смещаем кнопки ниже */
+        right: 10px;
+    }
 }
 
-.prev {
-    left: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 1;
-    display: none;
+@media (max-width: 480px) {
+    .slide {
+        flex: 0 0 100%; /* Одна карточка на маленьких экранах */
+    }
+
+    /* Позиционирование кнопок на мобильных устройствах */
+    .slider-controls {
+        top: 40px; /* Смещаем кнопки ниже */
+        right: 10px;
+    }
+}
+/* Стили для слайдера */
+.slider-container {
+    overflow: hidden;
+    width: 100%;
 }
 
-.next {
-    right: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 1;
-    display: none;
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    flex: 0 0 33.33%; /* По умолчанию три карточки */
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slide img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.slide img:hover {
+    transform: scale(1.02);
+}
+
+.slide p {
+    margin-top: 10px;
+    padding: 7px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.4rem;
+    color: #333;
+    text-align: left;
+    width: 100%;
+}
+
+.slide:hover {
+    transform: translateY(-2px);
 }
 
 /* Адаптивность */
@@ -283,7 +357,7 @@ button.visible {
 
 .footer p {
     margin: 0; /* Убираем отступы у параграфа */
-    font-size: 0.9rem; /* Уменьшаем размер текста */
+    font-size: 1.3rem; /* Уменьшаем размер текста */
 }
 
 /* Стили для секции с формой */
@@ -302,7 +376,7 @@ button.visible {
 .login-section h2,
 .register-section h2 {
     margin-bottom: 1.5rem; /* Отступ под заголовком */
-    font-size: 1.8rem;
+    font-size: 2em;
     color: #333;
 }
 
@@ -325,7 +399,7 @@ button.visible {
     padding: 0.8rem;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     transition: border-color 0.3s ease;
     box-sizing: border-box; /* Убеждаемся, что padding не увеличивает общую ширину */
 }
@@ -345,7 +419,7 @@ button.visible {
     border: none;
     padding: 1rem;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
@@ -377,7 +451,7 @@ button.visible {
     padding: 2rem;
     border-radius: 15px; /* Скругленные углы */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Тень */
-    max-width: 600px; /* Ограничиваем ширину секции */
+    max-width: 40%; /* Ограничиваем ширину секции */
     width: 100%;
     margin: 2rem auto; /* Центрируем секцию по горизонтали */
     text-align: center;
@@ -385,7 +459,7 @@ button.visible {
 
 .profile-section h2 {
     margin-bottom: 1.5rem; /* Отступ под заголовком */
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #333;
 }
 
@@ -401,7 +475,7 @@ button.visible {
 
 .profile-info p {
     margin: 0.5rem 0; /* Отступ между строками */
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #555;
 }
 
@@ -419,7 +493,7 @@ button.visible {
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     transition: background 0.3s ease, transform 0.3s ease;
 }
@@ -440,7 +514,7 @@ button.visible {
 
 .cart h3 {
     margin-bottom: 1rem; /* Отступ под заголовком */
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     color: #333;
 }
 
@@ -452,7 +526,7 @@ button.visible {
 
 .cart ul li {
     margin: 0.5rem 0; /* Отступ между строками */
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #555;
 }
 
@@ -541,3 +615,246 @@ body.dark-theme {
 .dark-theme .footer p {
     color: #ffffff; /* Белый текст */
 }
+
+
+
+/* Стили для формы в секции Trade-In */
+.tradein-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tradein-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.tradein-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.tradein-form input,
+.tradein-form textarea {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tradein-form input:focus,
+.tradein-form textarea:focus {
+    border-color: #ff69b4;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+}
+
+.consultation-button {
+    background: #ff69b4;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+.consultation-button:hover {
+    background: #e65ca0;
+    transform: scale(1.01);
+}
+
+/* Темная тема */
+.dark-theme .tradein-form label {
+    color: #ffffff;
+}
+
+.dark-theme .tradein-form input,
+.dark-theme .tradein-form textarea {
+    background: #2c2c2c;
+    color: #ffffff;
+    border-color: #4a4a4a;
+}
+
+.dark-theme .consultation-button {
+    background: #ff69b4;
+    color: #ffffff;
+}
+
+.dark-theme .consultation-button:hover {
+    background: #e65ca0;
+}
+
+/* Основные стили для уведомления */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50; /* Зеленый цвет */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Активное состояние уведомления */
+.notification.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Стили для текста уведомления */
+.notification-text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.mobile-menu-toggle {
+    display: none;
+}
+
+
+
+@media (max-width: 1024px) {
+
+    .profile-section {
+        max-width: 75%;
+    }
+
+    .mobile-menu-toggle {
+        display: none; /* Скрываем кнопку на десктопах */
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+    }
+    
+    .about-text {
+        text-align: left;
+        font-size: 1rem;
+        font-weight: bold;
+        flex: 1 1 50%; /* Текст занимает 50% ширины */
+        margin-right: 20px; /* Отступ между текстом и изображением */
+        color: #000000
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        background: #f8bcdf;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000; /* Добавьте z-index, чтобы меню было поверх других элементов */
+    }
+
+    .dark-theme .nav {
+        background: #4a4a4a;
+    }
+
+    .contact-button {
+        background: #ff69b4;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.3rem;
+        font-weight: bold;
+        transition: background 0.3s ease, transform 0.3s ease;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        height: auto;
+        text-decoration: none;
+    }
+
+    .nav.active {
+        display: flex; /* Показываем меню, когда оно активно */
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav ul li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu-toggle {
+        display: block; /* Показываем кнопку бургер-меню на мобильных устройствах */
+    }
+
+
+    /* .prev {
+        left: 12px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #f69eca;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+        z-index: 1;
+        display: none;
+    }
+
+    .next {
+        right: 12px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #f69eca;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+        z-index: 1;
+        display: none;
+    } */
+    
+}
+
+

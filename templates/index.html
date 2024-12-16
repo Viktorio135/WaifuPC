@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <header class="header">
@@ -18,7 +19,10 @@
                     <img src="{% static "logo.png" %}" alt="PC Repair & Assembly Logo">
                 </div>
             </a>
-            <nav class="nav">
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i> <!-- Иконка бургер-меню -->
+            </button>
+            <nav class="nav" id="nav">
                 <ul>
                     <li><a href="#about">О нас</a></li>
                     <li><a href="#works">Наши работы</a></li>
@@ -41,6 +45,12 @@
         </div>
     </header>
     <main>
+        {% if success_message %}
+                <div class="notification">
+                    <span class="notification-text">{{ success_message }}</span>
+                    <button class="notification-close"></button>
+                </div>
+        {% endif %} 
         <section id="about" class="section">
             <div class="about-content">
                 <div class="about-text">
@@ -54,6 +64,10 @@
         </section>
         {% if works %}
         <section id="works" class="section">
+            <div class="slider-controls">
+                <button class="prev">⟨</button>
+                <button class="next">⟩</button>
+            </div>
             <h2>Наши работы</h2>
             <div class="swiper">
                 <div class="slider-container">
@@ -65,8 +79,6 @@
                             </div>
                         {% endfor %}
                     </div>
-                <button class="prev">⟨</button>
-                <button class="next">⟩</button>
             </div>
         </section>
         {% endif %}
@@ -84,12 +96,33 @@
             
         </section>
         {% endif %}
-        {% if tradein %}
         <section id="trade-in" class="section">
             <h2>Trade-In</h2>
-            <p>{{ tradein.text|safe  }}</p>
+            <div class="notification-container">
+            </div>
+            {% if tradein %}
+                <p>{{ tradein.text|safe  }}</p>
+            {% endif %}
+            {% comment %} {% if success_message %}
+                <div class="notification">
+                    <span class="notification-text">{{ success_message }}</span>
+                </div>
+            {% endif %} {% endcomment %}
+            <form class="tradein-form" method="post" action="{% url 'main:index' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    {{ form.text.label_tag }}
+                    {{ form.text }}
+                </div>
+                <button type="submit" class="consultation-button">Получить консультацию</button>
+            </form>
+
+            
         </section>
-        {% endif %}
         {% if contacts %}
         <section id="contacts" class="section">
             <h2>Контакты</h2>
@@ -98,7 +131,7 @@
         {% endif %}
     </main>
     <footer class="footer">
-        <p>© 2024 PC Repair & Assembly</p>
+        <p>© 2024 WaifuPC</p>
     </footer>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script defer src="{% static "script.js" %}"></script>
@@ -127,6 +160,18 @@
                     localStorage.setItem('theme', 'light-theme');
                     themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Иконка луны для темной темы
                 }
+            });
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const nav = document.getElementById('nav');
+
+            if (!mobileMenuToggle || !nav) {
+                console.error("Элементы не найдены");
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                console.log("Кнопка нажата");
+                nav.classList.toggle('active');
             });
         });
     </script>

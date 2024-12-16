@@ -30,6 +30,9 @@
                     </button>
                 </form>
             </div>
+            {% if user.is_authenticated and user.is_superuser %}
+                <a href="/admin/">Админ-панель</a>
+            {% endif %}
             <button id="theme-toggle" class="theme-toggle">
                 <i class="fas fa-moon"></i> <!-- Иконка луны для темной темы -->
             </button>

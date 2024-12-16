@@ -24,10 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-(!+jk6d1g39gxitkjqu-=ubemjzbxz=zs00@cghmivha-^gf^j'
 
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Например, для Gmail
+EMAIL_PORT = 587  # Порт для TLS
+EMAIL_USE_TLS = True  # Использовать TLS (или EMAIL_USE_SSL для SSL)
+EMAIL_HOST_USER = 'spakovskijviktor0@gmail.com'  # Ваш email
+EMAIL_HOST_PASSWORD = 'obak lhzo coqf gzxu'  # Пароль от вашего email
+DEFAULT_FROM_EMAIL = 'spakovskijviktor0@gmail.com'  # Email, который будет указан в поле "От"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.58', '127.0.0.1']
 
 RECAPTCHA_PUBLIC_KEY = '6Ldn9JgqAAAAACTNRmQ3CoEptBGfKiFii4AwQSXm'
 RECAPTCHA_PRIVATE_KEY = '6Ldn9JgqAAAAACPntJJwt6wASQDxVqAMMP5aGfLu'

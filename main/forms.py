@@ -151,6 +151,22 @@ class RegistrationForm(forms.ModelForm):
         return user
     
 
+class TradeInForm(forms.Form):
+    email = forms.EmailField(
+                label='Ваша почта', 
+                widget=forms.EmailInput(attrs={
+                'placeholder': 'Введите ваше почту'
+            }),)
+    text = forms.CharField(
+        label='Описание компьютера',
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Опишите ваш компьютер'
+        }),
+    )
+
+
+
+
 
 # class ProfileEditForm(forms.ModelForm):
 #     class Meta:
