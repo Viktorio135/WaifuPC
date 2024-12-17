@@ -37,7 +37,7 @@ DEFAULT_FROM_EMAIL = 'spakovskijviktor0@gmail.com'  # Email, который бу
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.58', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.0.58', '127.0.0.1', '0.0.0.0']
 
 RECAPTCHA_PUBLIC_KEY = '6Ldn9JgqAAAAACTNRmQ3CoEptBGfKiFii4AwQSXm'
 RECAPTCHA_PRIVATE_KEY = '6Ldn9JgqAAAAACPntJJwt6wASQDxVqAMMP5aGfLu'

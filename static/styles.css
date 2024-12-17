@@ -74,6 +74,10 @@ body {
     /* flex: 1 1 50%; */
 }
 
+.section a {
+    text-decoration: none;
+}
+
 
 
 
@@ -101,14 +105,14 @@ body {
 }
 
 .about-image {
-    flex: 1 1 50%; /* Изображение занимает 50% ширины */
+    flex: 1 1 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .about-image img {
-    max-width: 100%;
+    max-width: 85%;
     height: auto;
     max-height: 300px; /* Ограничиваем максимальную высоту изображения */
 }
@@ -125,7 +129,7 @@ body {
     transition: background 0.3s ease, transform 0.3s ease; /* Анимация при наведении */
     display: inline-block; /* Делаем кнопку блочным элементом */
     text-align: center; /* Выравниваем текст по центру */
-    width: 50%; /* Фиксированная ширина кнопки */
+    width: 45%; /* Фиксированная ширина кнопки */
     height: auto; /* Фиксированная высота кнопки */
     text-decoration: none;
 }
@@ -288,6 +292,7 @@ body {
 .slider-container {
     overflow: hidden;
     width: 100%;
+    
 }
 
 .slider {
@@ -744,6 +749,15 @@ body.dark-theme {
 
 @media (max-width: 1024px) {
 
+
+    
+
+    .about-image img {
+        visibility: hidden;
+    }
+    
+
+
     .profile-section {
         max-width: 75%;
     }
@@ -765,6 +779,7 @@ body.dark-theme {
         margin-right: 20px; /* Отступ между текстом и изображением */
         color: #000000
     }
+
 
     .nav {
         display: none;
