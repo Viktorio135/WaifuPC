@@ -31,8 +31,8 @@ class IndexPage(TemplateView):
             subject = 'Новая заявка на Trade-In'
             message = f"Email: {form.cleaned_data['email']}\n" \
                       f"Сообщение: {form.cleaned_data['text']}"
-            from_email = 'spakovskijviktor0@gmail.com'  # Укажите ваш email
-            recipient_list = ['spakovskijviktor0@gmail.com']  # Укажите email получателя
+            from_email = 'waifpc@yandex.ru'  # Укажите ваш email
+            recipient_list = ['waifpc@yandex.ru']  # Укажите email получателя
 
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 

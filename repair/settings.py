@@ -27,12 +27,12 @@ SECRET_KEY = 'django-insecure-(!+jk6d1g39gxitkjqu-=ubemjzbxz=zs00@cghmivha-^gf^j
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Например, для Gmail
-EMAIL_PORT = 587  # Порт для TLS
-EMAIL_USE_TLS = True  # Использовать TLS (или EMAIL_USE_SSL для SSL)
-EMAIL_HOST_USER = 'spakovskijviktor0@gmail.com'  # Ваш email
-EMAIL_HOST_PASSWORD = 'obak lhzo coqf gzxu'  # Пароль от вашего email
-DEFAULT_FROM_EMAIL = 'spakovskijviktor0@gmail.com'  # Email, который будет указан в поле "От"
+EMAIL_HOST = 'smtp.yandex.ru'  # Например, для Gmail
+EMAIL_PORT = 465  # Порт для TLS
+EMAIL_USE_SSL = True  # Использовать TLS (или EMAIL_USE_SSL для SSL)
+EMAIL_HOST_USER = 'waifpc@yandex.ru'  # Ваш email
+EMAIL_HOST_PASSWORD = 'xlchaadtjudhnufg'  # Пароль от вашего email
+DEFAULT_FROM_EMAIL = 'waifpc@yandex.ru'  # Email, который будет указан в поле "От"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
