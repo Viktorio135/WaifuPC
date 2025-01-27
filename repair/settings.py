@@ -22,25 +22,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(!+jk6d1g39gxitkjqu-=ubemjzbxz=zs00@cghmivha-^gf^j'
+SECRET_KEY = ''
 
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'  # Например, для Gmail
+EMAIL_HOST = 'smtp.yandex.ru' 
 EMAIL_PORT = 465  # Порт для TLS
 EMAIL_USE_SSL = True  # Использовать TLS (или EMAIL_USE_SSL для SSL)
-EMAIL_HOST_USER = 'waifpc@yandex.ru'  # Ваш email
-EMAIL_HOST_PASSWORD = 'xlchaadtjudhnufg'  # Пароль от вашего email
-DEFAULT_FROM_EMAIL = 'waifpc@yandex.ru'  # Email, который будет указан в поле "От"
+EMAIL_HOST_USER = ''  # Ваш email
+EMAIL_HOST_PASSWORD = ''  # Пароль от вашего email
+DEFAULT_FROM_EMAIL = ''  # Email, который будет указан в поле "От"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.58', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['', '127.0.0.1', '0.0.0.0']
 
-RECAPTCHA_PUBLIC_KEY = '6Ldn9JgqAAAAACTNRmQ3CoEptBGfKiFii4AwQSXm'
-RECAPTCHA_PRIVATE_KEY = '6Ldn9JgqAAAAACPntJJwt6wASQDxVqAMMP5aGfLu'
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
 
 
 AUTH_USER_MODEL = 'main.CustomUser'
